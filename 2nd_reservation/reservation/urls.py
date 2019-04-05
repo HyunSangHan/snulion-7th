@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', feedpage.views.home),   
     path('', include('feedpage.urls')),
-    # path('accounts/', include('accounts.urls')),
+    path('accounts/', include('accounts.urls')),
 ]

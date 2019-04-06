@@ -7,12 +7,12 @@ def signup(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password1']
-        password2 = request.POST['password2']
-        if password == password2:
+        if password == request.POST['password2']:
             user = User.objects.create_user(
                 username, password
             )
             auth.login(request, user)
+            print(user)
             return redirect('home')
     return render(request, 'accounts/signup.html')
 
@@ -21,10 +21,18 @@ def login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(request, username=username, password=password)
+        print(user)
+        print(1)
         if user is not None:
+            print(user)
+            print(2)
             auth.login(request, user)
             return redirect('home')
         else:
+            print(3)
             return render(request, 'accounts/login.html', {'error': 'username or password is incorrect.'})
+    elif request.method == "GET":
+        return render(request, 'accounts/login.html')        
     else:
-        return render(request, 'accounts/login.html')
+        print(4)
+        return render(request, 'accounts/login.html', {'error': 'this is the problem'})

@@ -7,13 +7,19 @@
     </head>
     <body>
     <header style='background-color: yellow; color: white;'>
-
+        {% if user.is_authenticated %}
+        <strong style='color: black;'>{{user.get_username}}님 환영합니다.</strong>
+        <a href='{% url "logout" %}'> 로그아웃 </a>
+        <form id="logout" method="POST" action="{% url 'logout' %}">
+        {% csrf_token %} 
+        <!-- POST 실행 시점은 언제임??-->
+        <input type="hidden" />
+</form>
+        <a href='{% url "new" %}'> 새로쓰기 </a>
+        {% else %}
         <a href='{% url "signup" %}'> 회원가입 </a>
         <a href='{% url "login" %}'> 로그인 </a>
-
-        <div>님 환영합니다.</div>
-        <a href='{% url "logout" %}'> 로그아웃 </a>
-        <a href='{% url "new" %}'> 새로쓰기 </a>
+        {% endif %}
     </header>
     {% block content %}
     {% endblock %}

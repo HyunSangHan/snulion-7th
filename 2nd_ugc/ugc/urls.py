@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 import accounts.views
+import feeds.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', accounts.views.signup),
+    path('', feeds.views.index, name='index'),
+    path('new/', feeds.views.new, name='new'),
+    path('<int:id>/delete/', feeds.views.delete, name='delete'),
     path('accounts/', include('accounts.urls')),
 ]

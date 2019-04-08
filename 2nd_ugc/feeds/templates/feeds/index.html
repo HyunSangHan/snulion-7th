@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for feed in feeds %}
+    <hr>
+    <p>제목 : {{ feed.title }}</p>
+    <p>내용 : {{ feed.content }}</p>
+    <p>
+        <a href = '/{{ feed.id }}/delete' onclick='return confirm("정말 삭제하실?")'>삭제하기</a>
+    </p>
+{% endfor%}
+{% endblock content %}

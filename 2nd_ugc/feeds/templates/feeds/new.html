@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action='{% url "index" %}' method='POST'>
+        {% csrf_token %}
+        제목 : <input name='title' /> <br/>
+        내용 : <input name='content' /> <br/>
+        <input type='submit' value="작성하기" />
+    </form>
+{% endblock content %}

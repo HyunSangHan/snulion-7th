@@ -33,3 +33,34 @@ def logout(request):
         return redirect('/')
     else:
         return render(request, 'accounts/login.html')
+
+def profile(request):
+    user = request.user
+    profile = user.profile
+
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        if user.check_password(current_password) and (password1 == password2) and (password1 != '') :
+            # good case
+            user.set_password(password1)
+            user.username = request.POST['username']
+            user.save()
+            # profile.save()
+            return redirect('/')
+
+        else:
+            # for error message
+            if user.check_password(current_password) == False :
+                error_msg = 'Check your current password'
+            elif password1 != password2 :
+                error_msg = 'Check your new password'
+            elif password1 == '' :
+                error_msg = 'Check your new password. It is empty value!'
+            else :
+                error_msg = 'Unexpected error! Please tell us about this error case'
+            return render(request, 'accounts/profile.html', {'profile': profile, 'error': error_msg})
+
+    return render(request, 'accounts/profile.html', {'profile': profile}) #for GET method

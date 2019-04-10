@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Profile Edit</h1>
+{% if error %}
+{{ error }}
+{% endif %}
+
+<form action='{% url "profile" %}' method='POST'>
+    {% csrf_token %}
+    <p>
+        이름 : 
+        <input name='username' type='text' value='{{ profile.user.username }}' />
+    </p>
+    <p>
+        현재 비번 : 
+        <input name='current_password' type='password' value='' />
+    </p>
+    <p>
+        새로운 비번 : 
+        <input name='password1' type='password' value='' />
+    </p>
+    <p>
+        새로운 비번 확인 : 
+        <input name='password2' type='password' value='' />
+    </p>
+    <p>
+        성별 : 
+        업데이트 예정
+    </p>
+    <p>
+        생년월일 : 
+        업데이트 예정
+    </p>
+    <input type='submit' value='정보 수정하기' />
+</form>
+
+{% endblock %}

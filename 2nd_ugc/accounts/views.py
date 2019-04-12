@@ -42,13 +42,17 @@ def profile(request):
         current_password = request.POST['current_password']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-
-        if user.check_password(current_password) and (password1 == password2) and (password1 != '') :
+#비번 안바꿀 수도 있다는 거 반영 필요
+        if user.check_password(current_password) and (password1 == password2) :
             # good case
-            user.set_password(password1)
+            if password1 != '':
+                user.set_password(password1)
             user.username = request.POST['username']
             user.save()
-            # profile.save()
+            profile.birthday = request.POST['birthday']
+            profile.is_male = request.POST['gender']
+            profile.left_level = request.POST['politics']
+            profile.save()
             return redirect('/')
 
         else:

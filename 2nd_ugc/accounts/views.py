@@ -42,7 +42,7 @@ def profile(request):
         current_password = request.POST['current_password']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-#비번 안바꿀 수도 있다는 거 반영 필요
+# 디폴트 밸류 값 넣기
         if user.check_password(current_password) and (password1 == password2) :
             # good case
             if password1 != '':

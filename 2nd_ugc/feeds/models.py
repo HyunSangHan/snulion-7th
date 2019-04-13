@@ -1,17 +1,20 @@
 from django.db import models
 from django.utils import timezone
 from faker import Faker
+from django.core.validators import MaxValueValidator, MinValueValidator
+import random
 # Create your models here.
 
 class Feed(models.Model):
     title = models.CharField(max_length=50)
+    category = models.IntegerField(
+        default=8,
+        validators=[MaxValueValidator(8), MinValueValidator(1)]
+    )
+    writer = models.CharField(max_length=50)
     content = models.TextField()
+    img = models.ImageField()
     created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(blank=True, null=True)
-
-    def update_date(self):
-        self.update_at = timezone.now()
-        self.save()
 
     def __str__(self):
         return self.title
@@ -21,5 +24,7 @@ class Feed(models.Model):
             for i in range(count):
                 Feed.objects.create(
                     title=myfake.bs(),
+                    category = random.randrange(1,9),
+                    writer=myfake.name(),
                     content=myfake.text()
                 )

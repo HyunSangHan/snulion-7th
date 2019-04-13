@@ -3,8 +3,11 @@
 {% block content %}
 {% for feed in feeds %}
     <hr>
-    <p>제목 : {{ feed.title }}</p>
-    <p>내용 : {{ feed.content }}</p>
+    <p>[{{ feed.category}}]{{ feed.title }}</p>
+    <p> {{ feed.writer }} 기자</p>
+    <!--수정필요: 이미지-->
+    <p> {{ feed.img }}</p>
+    <p> {{ feed.content }}</p>
     <p>
         <a href = '/{{ feed.id }}/delete' onclick='return confirm("정말 삭제하실?")'>삭제하기</a>
     </p>

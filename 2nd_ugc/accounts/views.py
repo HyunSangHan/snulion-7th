@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
 from django.contrib import auth
 
 # Create your views here.
@@ -53,6 +54,7 @@ def profile(request):
             profile.is_male = request.POST['gender']
             profile.left_level = request.POST['politics']
             profile.save()
+            update_session_auth_hash(request, request.user)
             return redirect('/')
 
         else:
@@ -61,8 +63,6 @@ def profile(request):
                 error_msg = 'Check your current password'
             elif password1 != password2 :
                 error_msg = 'Check your new password'
-            elif password1 == '' :
-                error_msg = 'Check your new password. It is empty value!'
             else :
                 error_msg = 'Unexpected error! Please tell us about this error case'
             return render(request, 'accounts/profile.html', {'profile': profile, 'error': error_msg})

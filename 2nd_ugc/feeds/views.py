@@ -10,8 +10,11 @@ def index(request):
         return render(request, 'feeds/index.html', {'feeds' : feeds})
     elif request.method == 'POST':
         title = request.POST['title']
+        category = request.POST['category']
+        writer = request.POST['writer']
         content = request.POST['content']
-        Feed.objects.create(title=title, content=content)
+        img = request.POST['img']
+        Feed.objects.create(title=title, content=content, category=category, writer=writer, img=img)
         return redirect('/')
 
 def new(request):

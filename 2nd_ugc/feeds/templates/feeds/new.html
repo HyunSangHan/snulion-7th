@@ -1,10 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action='{% url "index" %}' method='POST'>
+    <form action='{% url "index" %}' id='article' method='POST'>
         {% csrf_token %}
-        제목 : <input name='title' /> <br/>
-        내용 : <input name='content' /> <br/>
+        <p>
+            제목<br/>
+            <input type='text' name='title' required /> <br/>
+        </p>
+        <p>
+            작성자<br/>
+            <input type='text' name='writer' required /> 기자 <br/>
+        </p>
+        <p>
+            이미지<br/>
+            <input type="file" name="img" accept="image/x-png,image/gif,image/jpeg" /> <br/>
+        </p>
+        <p>
+            내용<br/>
+            <textarea name='content' form='article' cols='60' rows='20' required ></textarea> <br/>
+        </p>
+        <p>
+            카테고리<br/>
+            <input type='radio' id='cat1' name='category' value='1' required> 
+            <label for='cat1'>연예</label>
+            <input type='radio' id='cat2' name='category' value='2' required> 
+            <label for='cat2'>스포츠</label>
+            <input type='radio' id='cat3' name='category' value='3' required> 
+            <label for='cat3'>정치</label>
+            <input type='radio' id='cat4' name='category' value='4' required> 
+            <label for='cat4'>경제</label>
+            <input type='radio' id='cat5' name='category' value='5' required> 
+            <label for='cat5'>사회</label>
+            <input type='radio' id='cat6' name='category' value='6' required> 
+            <label for='cat6'>생활/문화</label>
+            <input type='radio' id='cat7' name='category' value='7' required> 
+            <label for='cat7'>세계</label>
+            <input type='radio' id='cat8' name='category' value='8' required> 
+            <label for='cat8'>IT/과학</label>
+        </p>
         <input type='submit' value="작성하기" />
     </form>
 {% endblock content %}

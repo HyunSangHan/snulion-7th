@@ -12,10 +12,6 @@ class Profile(models.Model):
     birthday = models.DateField(blank=False, null=True)
     is_male = models.BooleanField(blank=False, null=True)
     created_at = models.DateTimeField(default=timezone.now)
-    left_level = models.IntegerField(
-        default=3,
-        validators=[MaxValueValidator(5), MinValueValidator(1)]
-     )
 
     def __str__(self):
         return self.user.username

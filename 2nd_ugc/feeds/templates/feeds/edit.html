@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action='{% url "index" %}' id='article' method='POST'>
+    <form action='/{{ feed.id }}/' id='article' method='POST'>
         {% csrf_token %}
         <p>
             제목<br/>
-            <input type='text' name='title' required /> <br/>
+            <input type='text' name='title' value="{{feed.title}}" required /> <br/>
         </p>
         <p>
             작성자<br/>
-            <input type='text' name='writer' required /> 기자 <br/>
+            <input type='text' name='writer' value="{{feed.writer}}" required /> 기자 <br/>
         </p>
         <p>
             이미지<br/>
@@ -17,7 +17,7 @@
         </p>
         <p>
             내용<br/>
-            <textarea name='content' form='article' cols='100' rows='20' required ></textarea> <br/>
+            <textarea name='content' form='article' cols='100' rows='20' required >{{feed.content}}</textarea> <br/>
         </p>
         <p>
             카테고리<br/>
@@ -40,8 +40,13 @@
         </p>
         <p>
             비밀번호<br/>
+            * 비밀번호를 잊어버리면 글 수정이 불가합니다. 비밀번호를 꼭 기억해주세요.<br/>
             <input type='password' name='password' required />
         </p>
-        <input type='submit' value="작성하기" />
+        <input type='submit' value="수정하기" />
+        <button><a href = '/{{ feed.id }}/manage/delete' onclick='return confirm("정말 삭제하실?")' style='text-decoration: none; color: #555555;'>
+        삭제하기
+        </a></button>
+
     </form>
 {% endblock content %}

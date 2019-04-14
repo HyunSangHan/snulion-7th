@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for feed in feeds %}
     <hr>
     <p>[{{ feed.category}}]{{ feed.title }}</p>
     <p> {{ feed.writer }} 기자</p>
@@ -11,7 +10,6 @@
     <p> {{ feed.img }}</p>
     <p> {{ feed.content }}</p>
     <p>
-        <a href = '/{{ feed.id }}' >더보기</a>
+        <a href = '/{{ feed.id }}/manage' >관리</a>
     </p>
-{% endfor%}
 {% endblock content %}

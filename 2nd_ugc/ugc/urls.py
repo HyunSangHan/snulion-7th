@@ -23,6 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', feeds.views.index, name='index'),
     path('new/', feeds.views.new, name='new'),
-    path('<int:id>/delete/', feeds.views.delete, name='delete'),
+    path('<int:id>/', feeds.views.show, name='show'), 
+    path('<int:id>/manage/', feeds.views.manage, name='manage'),
+    path('<int:id>/manage/edit/', feeds.views.edit, name='edit'),
+    path('<int:id>/manage/delete/', feeds.views.delete, name='delete'),
     path('accounts/', include('accounts.urls')),
 ]

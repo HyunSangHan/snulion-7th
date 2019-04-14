@@ -11,10 +11,12 @@ class Feed(models.Model):
         default=8,
         validators=[MaxValueValidator(8), MinValueValidator(1)]
     )
+    password = models.TextField(default='1234') # have to fix (for privacy and default)
     writer = models.CharField(max_length=50)
     content = models.TextField()
     img = models.ImageField()
     created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
@@ -26,5 +28,5 @@ class Feed(models.Model):
                     title=myfake.bs(),
                     category = random.randrange(1,9),
                     writer=myfake.name(),
-                    content=myfake.text()
+                    content=myfake.text(),
                 )

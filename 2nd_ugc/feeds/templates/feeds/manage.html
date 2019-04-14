@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action='/{{ feed.id }}/manage/' method='POST'>
+        {% csrf_token %}
+        <p>
+            비밀번호<br/>
+            <input type='password' name='password' required />
+        </p>
+        <input type='submit' value="관리자모드" />
+    </form>
+{% endblock content %}

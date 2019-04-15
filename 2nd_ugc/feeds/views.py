@@ -59,12 +59,12 @@ def show(request, id):
         feed.img = request.POST['img']
         feed.updated_at = timezone.now()
         feed.save()
-        return redirect('/')
+        return redirect('/article/%d/'%id)
 
 def manage(request, id):
     feed = Feed.objects.get(id=id)
     if (request.method == 'POST') and (feed.password == request.POST['password']) :
-        return redirect('edit/')
+        return redirect('/article/%d/edit/'%id)
     else:
         return render(request, 'feeds/manage.html', {'feed': feed})
 
@@ -73,7 +73,6 @@ def edit(request, id):
     if request.method == 'GET':
         return render(request, 'feeds/edit.html', {'feed': feed})    
 
-# why is it not working??
 def delete(request, id):
     feed = Feed.objects.get(id=id)
     feed.delete()

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>[{{ feed.category}}] {{ feed.title }}</h1>
+    <h2>{{ feed.title }}</h2>
+    {{feed.category}}
     <p> {{ feed.writer }} 기자</p>
     <p> 최초작성일: {{ feed.created_at }} </p>
     <p> 최종수정일: {{ feed.updated_at }} </p>
@@ -9,6 +10,6 @@
     <p> {{ feed.img }}</p>
     <p> {{ feed.content }}</p>
     <p>
-        <a href = '/{{ feed.id }}/manage' >관리</a>
+        <a href = '/article/{{ feed.id }}/manage' >관리</a>
     </p>
 {% endblock content %}

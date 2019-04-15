@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action='/{{ feed.id }}/' id='article' method='POST'>
+    <form action='/article/{{ feed.id }}/' id='article' method='POST'>
         {% csrf_token %}
         <p>
             제목<br/>

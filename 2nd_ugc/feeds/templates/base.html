@@ -1,13 +1,25 @@
 <!-- feedpage/templates/base.html -->
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/
+bootstrap/4.1.2/css/bootstrap.min.css" 
+integrity="sha384-Smlep5jCw/wG7hdkwQ/
+Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
+<script src="https://stackpath.bootstrapcdn.com/
+bootstrap/4.1.2/js/bootstrap.min.js" 
+integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/
+CG0xlczd+2O/em" crossorigin="anonymous"></script>
         <title>FEED</title>
     </head>
     <body>
     <header style='background-color: yellow; color: white;'>
-        <a href='{% url "new" %}'> 새로쓰기 </a>
+        <a href='{% url "index" %}'>홈으로가기</a> &nbsp
+        <a href='{% url "new" %}'>새로쓰기</a>
     </header>
     {% block content %}
     {% endblock %}

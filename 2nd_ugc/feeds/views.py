@@ -21,6 +21,32 @@ def index(request):
 def new(request):
     return render(request, 'feeds/new.html')
 
+def category(request, id):
+    if id == 1:
+        category = '연예'
+    elif id == 2:
+        category = '스포츠'
+    elif id == 3:
+        category = '정치'
+    elif id == 4:
+        category = '경제'
+    elif id == 5:
+        category = '사회'
+    elif id == 6:
+        category = '생활/문화'
+    elif id == 7:
+        category = '세계'
+    elif id == 8:
+        category = 'IT/과학'
+    else:
+        category = None
+    
+    if category:
+        feeds = Feed.objects.filter(category = category)
+        return render(request, 'feeds/category.html', {'feeds' : feeds})
+    else:
+        return redirect('/')
+
 def show(request, id):
     feed = Feed.objects.get(id=id)
     if request.method == 'GET':

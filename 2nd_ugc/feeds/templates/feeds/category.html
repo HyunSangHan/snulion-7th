@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ feeds.first.category }}</h1>
+{% for feed in feeds %}
+    <hr>
+    <p>{{ feed.title }}</p>
+    <p> {{ feed.writer }} 기자</p>
+    <p> 최초작성일: {{ feed.created_at }} </p>
+    <p> 최종수정일: {{ feed.updated_at }} </p>
+    <!--수정필요: 이미지-->
+    <p> {{ feed.img }}</p>
+    <p> {{ feed.content }}</p>
+    <p>
+        <a href = '/{{ feed.id }}' >더보기</a>
+    </p>
+{% endfor%}
+{% endblock content %}

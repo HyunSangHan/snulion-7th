@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect
 from .models import Feed
 from django.utils import timezone
+from django.core.paginator import Paginator
+
 # from django.contrib import auth
 
 # Create your views here.
 def index(request):
     # 로그인 한 경우에만 index를 렌더해주려면 어떻게 하지?
     if request.method == 'GET':
-        feeds = Feed.objects.all().order_by('-updated_at', '-created_at')
+        feeds_all = Feed.objects.all().order_by('-updated_at', '-created_at')
+        paginator = Paginator(feeds_all, 5)
+        page_num = request.GET.get('page')
+        feeds = paginator.get_page(page_num)
         return render(request, 'feeds/index.html', {'feeds' : feeds})
     elif request.method == 'POST':
         title = request.POST['title']
@@ -42,7 +47,10 @@ def category(request, id):
         category = None
     
     if category:
-        feeds = Feed.objects.filter(category = category).order_by('-updated_at', '-created_at')
+        feeds_all = Feed.objects.filter(category = category).order_by('-updated_at', '-created_at')
+        paginator = Paginator(feeds_all, 5)
+        page_num = request.GET.get('page')
+        feeds = paginator.get_page(page_num)
         return render(request, 'feeds/category.html', {'feeds' : feeds})
     else:
         return redirect('/')

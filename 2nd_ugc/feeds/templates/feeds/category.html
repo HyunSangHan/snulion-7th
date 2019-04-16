@@ -6,8 +6,8 @@
     <hr>
     <p>{{ feed.title }}</p>
     <p> {{ feed.writer }} 기자</p>
-    <p> 최초작성일: {{ feed.created_at }} </p>
-    <p> 최종수정일: {{ feed.updated_at }} </p>
+    <p> 기사입력: {{ feed.created_at }} </p>
+    <p> 최종편집: {{ feed.updated_at }} </p>
     <!--수정필요: 이미지-->
     <p> {{ feed.img }}</p>
     <p> {{ feed.content }}</p>
@@ -15,4 +15,19 @@
         <a href = '/article/{{ feed.id }}' >더보기</a>
     </p>
 {% endfor%}
+
+{% if feeds.has_previous %}
+<a href="?page=1">First</a>
+<a href="?page={{feeds.previous_page_number}}">Previous</a>
+{% endif %}
+
+<span>{{feeds.number}}</span>
+<span>of</span>
+<span>{{feeds.paginator.num_pages}}</span>
+
+{% if feeds.has_next %}
+<a href="?page={{feeds.next_page_number}}">Next</a>
+<a href="?page={{feeds.paginator.num_pages}}">Last</a>
+{% endif %}
+
 {% endblock content %}

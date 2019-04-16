@@ -4,12 +4,15 @@
     <h2>{{ feed.title }}</h2>
     {{feed.category}}
     <p> {{ feed.writer }} 기자</p>
-    <p> 최초작성일: {{ feed.created_at }} </p>
-    <p> 최종수정일: {{ feed.updated_at }} </p>
+    <p> 기사입력: {{ feed.created_at }} </p>
+    <p> 최종편집: {{ feed.updated_at }} </p>
     <!--수정필요: 이미지-->
     <p> {{ feed.img }}</p>
     <p> {{ feed.content }}</p>
     <p>
         <a href = '/article/{{ feed.id }}/manage' >관리</a>
     </p>
+
+{% comment %} 복사하기 url도 넣기 {% endcomment %}
+
 {% endblock content %}

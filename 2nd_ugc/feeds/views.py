@@ -7,7 +7,7 @@ from django.utils import timezone
 def index(request):
     # 로그인 한 경우에만 index를 렌더해주려면 어떻게 하지?
     if request.method == 'GET':
-        feeds = Feed.objects.all()
+        feeds = Feed.objects.all().order_by('-updated_at', '-created_at')
         return render(request, 'feeds/index.html', {'feeds' : feeds})
     elif request.method == 'POST':
         title = request.POST['title']
@@ -42,7 +42,7 @@ def category(request, id):
         category = None
     
     if category:
-        feeds = Feed.objects.filter(category = category)
+        feeds = Feed.objects.filter(category = category).order_by('-updated_at', '-created_at')
         return render(request, 'feeds/category.html', {'feeds' : feeds})
     else:
         return redirect('/')

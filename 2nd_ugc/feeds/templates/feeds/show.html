@@ -3,6 +3,9 @@
 {% block content %}
     <h2>{{ feed.title }}</h2>
     {{feed.category}}
+    {% if feed.img %}
+    <img src="{{ feed.img.url }}" alt="test imag">
+    {% endif %}
     <p> {{ feed.writer }} 기자</p>
     <p> 기사입력: {{ feed.created_at }} </p>
     <p> 최종편집: {{ feed.updated_at }} </p>

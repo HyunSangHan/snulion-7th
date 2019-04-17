@@ -10,7 +10,7 @@
     <p> 기사입력: {{ feed.created_at }} </p>
     <p> 최종편집: {{ feed.updated_at }} </p>
     <!--수정필요: 이미지-->
-    <p> {{ feed.img }}</p>
+    {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
     <p> {{ feed.content }}</p>
     <p>
         <a href = 'article/{{ feed.id }}' >더보기</a>

@@ -11,7 +11,7 @@ class Feed(models.Model):
     password = models.TextField(default='1234') # have to fix (for privacy and default)
     writer = models.CharField(max_length=50)
     content = models.TextField()
-    img = models.ImageField()
+    img = models.ImageField(upload_to='img/')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 

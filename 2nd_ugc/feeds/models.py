@@ -15,6 +15,9 @@ class Feed(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 
+    # class Meta:
+    #     ordering = ['-created_at', '-updated_at']
+
     def __str__(self):
         return self.title
 

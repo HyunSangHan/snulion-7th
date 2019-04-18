@@ -1,4 +1,4 @@
-.test {
-    color: blue;
-    font-size: 100px;
+.deco-none {
+    color: black;
+    text-decoration: none;
 }

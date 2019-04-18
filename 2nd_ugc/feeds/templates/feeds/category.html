@@ -2,7 +2,7 @@
 
 {% block content %}
 <!--이거왜갑자기 안되냐-->
-<h1>{{ feeds.first.category }}</h1>
+<h1>{{ category }}</h1>
 {% for feed in feeds %}
     <hr>
     <p>{{ feed.title }}</p>

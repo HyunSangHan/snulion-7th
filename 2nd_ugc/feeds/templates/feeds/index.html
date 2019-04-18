@@ -1,20 +1,17 @@
 {% extends 'base.html' %}
 
-{% comment %} reverse를 구현해보자! {% endcomment %}
-
 {% block content %}
 {% for feed in feeds %}
     <hr>
-    <p>[{{ feed.category}}] {{ feed.title }}</p>
-    <p> {{ feed.writer }} 기자</p>
-    <p> 기사입력: {{ feed.created_at }} </p>
-    <p> 최종편집: {{ feed.updated_at }} </p>
+    <a href = 'article/{{ feed.id }}' >
+    <div class='deco-none'>
+    [{{ feed.category}}] {{ feed.title }}
+
     <!--수정필요: 이미지-->
     {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
-    <p> {{ feed.content }}</p>
-    <p>
-        <a href = 'article/{{ feed.id }}' >더보기</a>
-    </p>
+    {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
+    </div>
+    </a>
 {% endfor%}
 
 {% if feeds.has_previous %}

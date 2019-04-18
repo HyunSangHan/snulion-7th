@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Feed
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # from django.contrib import auth
 
@@ -9,11 +10,14 @@ from django.core.paginator import Paginator
 def index(request):
     # 로그인 한 경우에만 index를 렌더해주려면 어떻게 하지?
     if request.method == 'GET':
+        keyword = request.GET.get('keyword', '')
         feeds_all = Feed.objects.all().order_by('-updated_at', '-created_at')
-        paginator = Paginator(feeds_all, 5)
+        if keyword: 
+            feeds_all = feeds_all.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(writer__icontains=keyword))
+        paginator = Paginator(feeds_all, 10)
         page_num = request.GET.get('page')
         feeds = paginator.get_page(page_num)
-        return render(request, 'feeds/index.html', {'feeds' : feeds})
+        return render(request, 'feeds/index.html', {'feeds' : feeds, 'keyword' : keyword})
     elif request.method == 'POST':
         title = request.POST['title']
         category = request.POST['category']
@@ -47,11 +51,15 @@ def category(request, id):
         category = None
     
     if category:
+        keyword = request.GET.get('keyword', '')
         feeds_all = Feed.objects.filter(category = category).order_by('-updated_at', '-created_at')
-        paginator = Paginator(feeds_all, 5)
+        if keyword: 
+            feeds_all = feeds_all.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(writer__icontains=keyword))
+        paginator = Paginator(feeds_all, 10)
         page_num = request.GET.get('page')
         feeds = paginator.get_page(page_num)
-        return render(request, 'feeds/category.html', {'feeds' : feeds})
+
+        return render(request, 'feeds/category.html', {'feeds' : feeds, 'category' : category})
     else:
         return redirect('/')
 

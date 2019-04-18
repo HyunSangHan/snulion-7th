@@ -25,6 +25,11 @@
         <a href='/7'>세계</a> &nbsp
         <a href='/8'>IT/과학</a>
 
+        <form action="" method="get">
+            <input type="text" name="keyword" value="{{ keyword }}">
+            <input type="submit" value="검색">
+        </form>
+
     </header>
     {% block content %}
     {% endblock %}

@@ -1,3 +1,20 @@
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 98px;
+}
+
+body {
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+footer {
+    text-align: center;
+}
+
 a .deco-none {
     color: black;
     text-decoration: none;
@@ -13,10 +30,19 @@ a .deco-none {
     text-decoration: none;
 }
 
+.listing-all {
+    margin-top: 80px;
+}
+
 .listing {
     border: 1px solid black;
     padding: 10px;
     margin: 5px;
+}
+
+.hover > :hover {
+    cursor: pointer;
+    background-color: whitesmoke;
 }
 
 .listing-title {
@@ -32,4 +58,8 @@ a .deco-none {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.offset-down {
+    margin-top: 100px;
 }

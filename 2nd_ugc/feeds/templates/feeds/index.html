@@ -2,16 +2,23 @@
 
 {% block content %}
 {% for feed in feeds %}
-    <hr>
-    <a href = 'article/{{ feed.id }}' >
-    <div class='deco-none'>
-    [{{ feed.category}}] {{ feed.title }}
-
-    <!--수정필요: 이미지-->
-    {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
-    {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
+<div class = 'deco-none listing'>
+<a href = '/article/{{ feed.id }}' >
+<div class='h-100'>
+    <div class='deco-none flex w-100 h-100'>
+        <div class = 'listing-title'>
+            [{{ feed.category}}] {{ feed.title }}
+            <!--수정필요: 이미지-->
+            {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
+            {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
+        </div class = ''>
+        <div>
+            <img src="http://www.balletnmodel.com/data/editor/1804/ed2e758db4d3f98eb4014ac30012ef0a_1524036326_18.jpg" alt="" height="60" width="80" />
+        </div>
     </div>
-    </a>
+</div>
+</a>
+</div>
 {% endfor%}
 
 {% if feeds.has_previous %}

@@ -4,17 +4,22 @@
 <!--이거왜갑자기 안되냐-->
 <h1>{{ category }}</h1>
 {% for feed in feeds %}
-    <hr>
-    <p>{{ feed.title }}</p>
-    <p> {{ feed.writer }} 기자</p>
-    <p> 기사입력: {{ feed.created_at }} </p>
-    <p> 최종편집: {{ feed.updated_at }} </p>
-    <!--수정필요: 이미지-->
-    <p> {{ feed.img }}</p>
-    <p> {{ feed.content }}</p>
-    <p>
-        <a href = '/article/{{ feed.id }}' >더보기</a>
-    </p>
+<div class = 'deco-none listing'>
+    <a href = '/article/{{ feed.id }}' >
+        <div class='deco-none flex w-100 h-100'>
+            <div class = 'listing-title'>
+                {{ feed.title }}
+                <!--수정필요: 이미지-->
+                {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
+                {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
+            </div class = ''>
+            <div>
+                <img src="http://www.balletnmodel.com/data/editor/1804/ed2e758db4d3f98eb4014ac30012ef0a_1524036326_18.jpg" alt="" height="60" width="80" />
+            </div>
+        </div>
+    </a>
+</div>
+
 {% endfor%}
 
 {% if feeds.has_previous %}

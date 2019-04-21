@@ -2,13 +2,11 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    height: 98px;
+    height: 95px;
 }
 
 body {
-    position: fixed;
     width: 100%;
-    top: 0;
 }
 
 footer {

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="offset-down">
     <h2>{{ feed.title }}</h2>
     {{feed.category}}
     {% if feed.img %}
@@ -18,5 +19,5 @@
     </p>
 
 {% comment %} 복사하기 url도 넣기 {% endcomment %}
-
+</div>
 {% endblock content %}

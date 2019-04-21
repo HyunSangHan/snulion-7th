@@ -2,6 +2,7 @@
 
 {% block content %}
 <!--이거왜갑자기 안되냐-->
+<div class="offset-down">
 <h1>{{ category }}</h1>
 {% for feed in feeds %}
 <div class = 'deco-none listing'>
@@ -19,9 +20,8 @@
         </div>
     </a>
 </div>
-
 {% endfor%}
-
+</div>
 {% if feeds.has_previous %}
 <a href="?page=1">First</a>
 <a href="?page={{feeds.previous_page_number}}">Previous</a>

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div>
     <form action='/article/{{ feed.id }}/manage/' method='POST'>
         {% csrf_token %}
         <p>
@@ -9,4 +10,5 @@
         </p>
         <input type='submit' value="수정모드" />
     </form>
+</div>
 {% endblock content %}

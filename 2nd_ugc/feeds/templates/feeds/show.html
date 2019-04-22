@@ -2,22 +2,28 @@
 
 {% block content %}
 <div class="offset-down">
-    <h2>{{ feed.title }}</h2>
-    {{feed.category}}
-    {% if feed.img %}
-    <img src="{{ feed.img.url }}" alt="test imag">
-    {% endif %}
-    <p> {{ feed.writer }} 기자</p>
-    <p> 기사입력: {{ feed.created_at }} </p>
-    <p> 최종편집: {{ feed.updated_at }} </p>
-    <!--수정필요: 이미지-->
-    <p> {{ feed.img }}</p>
-    <p> {{ feed.content }}</p>
-    ⓒ 무단전재 및 재배포 적극 권장
+    <div>
+        <div>
+            <h2>{{ feed.title }}</h2>
+        </div>
+        <div>
+            {{feed.category}}
+            <p> {{ feed.writer }} 기자</p>
+            <p> 기사입력: {{ feed.created_at }} </p>
+            <p> 최종편집: {{ feed.updated_at }} </p>
+        </div>
+    </div>
+    <div>
+        <!--수정필요: 이미지-->
+        {% if feed.img %}
+        <img src="{{ feed.img.url }}" alt="test imag">
+        {% endif %}
+        <p> {{ feed.content }}</p>
+        ⓒ 무단전재 및 재배포 적극 권장
+    </div>
     <p>
         <a href = '/article/{{ feed.id }}/manage' >수정</a>
     </p>
-
 {% comment %} 복사하기 url도 넣기 {% endcomment %}
 </div>
 {% endblock content %}

@@ -3,24 +3,24 @@
 {% block content %}
 <!--이거왜갑자기 안되냐-->
 <div class="offset-down">
-<h1>{{ category }}</h1>
-{% for feed in feeds %}
-<div class = 'deco-none listing'>
-    <a href = '/article/{{ feed.id }}' >
-        <div class='deco-none flex w-100 h-100'>
-            <div class = 'listing-title'>
-                {{ feed.title }}
-                <!--수정필요: 이미지-->
-                {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
-                {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
-            </div class = ''>
-            <div>
-                <img src="http://www.balletnmodel.com/data/editor/1804/ed2e758db4d3f98eb4014ac30012ef0a_1524036326_18.jpg" alt="" height="60" width="80" />
+    <h1>{{ category }}</h1>
+    {% for feed in feeds %}
+    <div class = 'deco-none listing'>
+        <a href = '/article/{{ feed.id }}' >
+            <div class='deco-none flex w-100 h-100'>
+                <div class = 'listing-title'>
+                    {{ feed.title }}
+                    <!--수정필요: 이미지-->
+                    {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
+                    {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
+                </div class = ''>
+                <div>
+                    <img src="http://www.balletnmodel.com/data/editor/1804/ed2e758db4d3f98eb4014ac30012ef0a_1524036326_18.jpg" alt="" height="60" width="80" />
+                </div>
             </div>
-        </div>
-    </a>
-</div>
-{% endfor%}
+        </a>
+    </div>
+    {% endfor%}
 </div>
 {% if feeds.has_previous %}
 <a href="?page=1">First</a>

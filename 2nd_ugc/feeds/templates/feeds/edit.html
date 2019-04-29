@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="offset-down">
+
     <form action='/article/{{ feed.id }}/' id='article' method='POST'>
         {% csrf_token %}
         <p>

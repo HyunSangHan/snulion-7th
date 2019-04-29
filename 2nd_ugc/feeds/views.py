@@ -9,16 +9,7 @@ from django.db.models import Q
 # Create your views here.
 def index(request):
     # 로그인 한 경우에만 index를 렌더해주려면 어떻게 하지?
-    if request.method == 'GET':
-        keyword = request.GET.get('keyword', '')
-        feeds_all = Feed.objects.all().order_by('-updated_at', '-created_at')
-        if keyword: 
-            feeds_all = feeds_all.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(writer__icontains=keyword))
-        paginator = Paginator(feeds_all, 10)
-        page_num = request.GET.get('page')
-        feeds = paginator.get_page(page_num)
-        return render(request, 'feeds/index.html', {'feeds' : feeds, 'keyword' : keyword})
-    elif request.method == 'POST':
+    if request.method == 'POST':
         title = request.POST['title']
         category = request.POST['category']
         writer = request.POST['writer']
@@ -26,6 +17,26 @@ def index(request):
         img = request.POST['img']
         Feed.objects.create(title=title, content=content, category=category, writer=writer, img=img)
         return redirect('/')
+    else:
+        keyword = request.GET.get('keyword', '')
+        feeds_all = Feed.objects.all().order_by('-updated_at', '-created_at')
+        if keyword: 
+            feeds_all = feeds_all.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(writer__icontains=keyword))
+        search_result_num = len(feeds_all)
+
+        paginator = Paginator(feeds_all, 10)
+        page_num = request.GET.get('page')
+        feeds = paginator.get_page(page_num)
+
+        if keyword and feeds:
+            is_searched = True
+        elif keyword == '':
+            is_searched = False
+        else:
+            is_searched = True
+        print(is_searched)
+        print(search_result_num)
+        return render(request, 'feeds/index.html', {'feeds' : feeds, 'keyword' : keyword, 'is_searched' : is_searched, 'search_result_num' : search_result_num})
 
 def new(request):
     return render(request, 'feeds/new.html')
@@ -60,6 +71,7 @@ def category(request, id):
         feeds = paginator.get_page(page_num)
 
         return render(request, 'feeds/category.html', {'feeds' : feeds, 'category' : category})
+
     else:
         return redirect(request.META['HTTP_REFERER'])
 
@@ -107,6 +119,8 @@ def delete_comment(request, id, cid):
         c = FeedComment.objects.get(id=cid)
         if c.password == request.POST['password']:
             c.delete()
-        return redirect('/article/%d/'%id)
+            return redirect('/article/%d/'%id)
+        else:
+            return redirect(request.META['HTTP_REFERER'])
     else:
         return render(request, 'feeds/manage_comment.html', {'id':id, 'cid':cid})

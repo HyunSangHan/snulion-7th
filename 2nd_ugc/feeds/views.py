@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Feed, FeedComment
+from .models import Feed, FeedComment, CommentReply
 from django.utils import timezone
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -99,8 +99,7 @@ def manage(request, id):
 
 def edit(request, id):
     feed = Feed.objects.get(id=id)
-    if request.method == 'GET':
-        return render(request, 'feeds/edit.html', {'feed': feed})    
+    return render(request, 'feeds/edit.html', {'feed': feed})    
 
 def delete(request, id):
     feed = Feed.objects.get(id=id)
@@ -124,3 +123,21 @@ def delete_comment(request, id, cid):
             return redirect(request.META['HTTP_REFERER'])
     else:
         return render(request, 'feeds/manage_comment.html', {'id':id, 'cid':cid})
+
+def create_reply(request, id, cid):
+    replyer = request.POST['replyer']
+    password = request.POST['password']
+    content = request.POST['content']
+    CommentReply.objects.create(feed_comment_id=cid, replyer=replyer, password=password, content=content)
+    return redirect(request.META['HTTP_REFERER'])
+
+def delete_reply(request, id, cid, rid):
+    if request.method == 'POST':
+        r = CommentReply.objects.get(id=rid)
+        if r.password == request.POST['password']:
+            r.delete()
+            return redirect('/article/%d/'%id)
+        else:
+            return redirect(request.META['HTTP_REFERER'])
+    else:
+        return render(request, 'feeds/manage_reply.html', {'id':id, 'cid':cid, 'rid':rid})

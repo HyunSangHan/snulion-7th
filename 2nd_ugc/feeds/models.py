@@ -51,9 +51,19 @@ class Feed(models.Model):
 class FeedComment(models.Model):
     content = models.TextField()
     feed = models.ForeignKey(Feed, on_delete=models.CASCADE)
-    reactor = models.CharField(max_length=5)
+    reactor = models.CharField(max_length=10)
     password = models.TextField(default='1234') # have to fix (for privacy and default)
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.reactor
+        
+class CommentReply(models.Model):
+    content = models.TextField()
+    feed_comment = models.ForeignKey(FeedComment, on_delete=models.CASCADE)
+    replyer = models.CharField(max_length=10)
+    password = models.TextField(default='1234') # have to fix (for privacy and default)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.replyer

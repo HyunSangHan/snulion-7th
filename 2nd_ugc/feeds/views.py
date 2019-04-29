@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Feed
+from .models import Feed, FeedComment
 from django.utils import timezone
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -61,13 +61,11 @@ def category(request, id):
 
         return render(request, 'feeds/category.html', {'feeds' : feeds, 'category' : category})
     else:
-        return redirect('/')
+        return redirect(request.META['HTTP_REFERER'])
 
 def show(request, id):
     feed = Feed.objects.get(id=id)
-    if request.method == 'GET':
-        return render(request, 'feeds/show.html', {'feed': feed})
-    elif request.method == 'POST':
+    if request.method == 'POST':
         feed.title = request.POST['title']
         feed.category = request.POST['category']
         feed.writer = request.POST['writer']
@@ -76,10 +74,13 @@ def show(request, id):
         feed.updated_at = timezone.now()
         feed.save()
         return redirect('/article/%d/'%id)
+    else:
+        return render(request, 'feeds/show.html', {'feed': feed})
 
 def manage(request, id):
     feed = Feed.objects.get(id=id)
     if (request.method == 'POST') and (feed.password == request.POST['password']) :
+        # 이렇게 개발하면 안되지!!! 나중에 수정필요
         return redirect('/article/%d/edit/'%id)
     else:
         return render(request, 'feeds/manage.html', {'feed': feed})
@@ -93,3 +94,19 @@ def delete(request, id):
     feed = Feed.objects.get(id=id)
     feed.delete()
     return redirect('/')
+
+def create_comment(request, id):
+    reactor = request.POST['reactor']
+    password = request.POST['password']
+    content = request.POST['content']
+    FeedComment.objects.create(feed_id=id, reactor=reactor, password=password, content=content)
+    return redirect(request.META['HTTP_REFERER'])
+
+def delete_comment(request, id, cid):
+    if request.method == 'POST':
+        c = FeedComment.objects.get(id=cid)
+        if c.password == request.POST['password']:
+            c.delete()
+        return redirect('/article/%d/'%id)
+    else:
+        return render(request, 'feeds/manage_comment.html', {'id':id, 'cid':cid})

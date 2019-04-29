@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
+<div class="offset-down">
     <form action='/article/{{ feed.id }}/' id='article' method='POST'>
         {% csrf_token %}
         <p>

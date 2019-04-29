@@ -61,3 +61,15 @@ a .deco-none {
 .offset-down {
     margin-top: 100px;
 }
+
+@media screen and (max-width: 767px){ /*Mobile*/
+    .pc-only {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px){ /*PC*/
+    .mobile-only {
+        display: none;
+    }
+}

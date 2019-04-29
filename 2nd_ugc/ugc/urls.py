@@ -30,6 +30,8 @@ urlpatterns = [
     path('article/<int:id>/manage/', feeds.views.manage, name='manage'),
     path('article/<int:id>/edit/', feeds.views.edit, name='edit'),
     path('article/<int:id>/delete/', feeds.views.delete, name='delete'),
+    path('article/<int:id>/comments/', feeds.views.create_comment, name='create_comment'),
+    path('article/<int:id>/comments/<int:cid>/', feeds.views.delete_comment, name='delete_comment'),
     path('accounts/', include('accounts.urls')),
 ]
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

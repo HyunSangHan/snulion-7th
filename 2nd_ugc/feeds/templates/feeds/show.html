@@ -25,5 +25,23 @@
         <a href = '/article/{{ feed.id }}/manage' >수정</a>
     </p>
 {% comment %} 복사하기 url도 넣기 {% endcomment %}
+    <!-- 여기서부터 새로 추가한 코드 -->
+    {% for c in feed.feedcomment_set.all %}
+    <p>{{c.reactor}} : {{ c.content }}</p>
+    <a href="/article/{{ feed.id }}/comments/{{ c.id }}/">
+        <button>댓글 삭제</button>
+        <!--여기에서 당장수정하기처럼 비밀번호 당장 수정칸 제공 구현할 수 있을듯-->
+    </a>
+    {% endfor %}
+    <hr>
+    <form action="/article/{{ feed.id }}/comments/" id="comment" method="POST">
+    {% csrf_token %}
+        <input type="text" name="reactor" placeholder="작성자 이름" required />
+        <input type="password" name="password"  placeholder="비밀번호" required />
+        <br/>
+        <textarea name="content" form="comment" cols="41" rows="3" placeholder="댓글을 입력하세요." required ></textarea> <br/>
+        <button type="submit">댓글 달기</button>
+    </form>
+    <!-- 새 코드 끝 -->
 </div>
 {% endblock content %}

@@ -9,7 +9,7 @@ class Feed(models.Model):
     title = models.CharField(max_length=50)
     category = models.CharField(max_length=10)
     password = models.TextField(default='1234') # have to fix (for privacy and default)
-    writer = models.CharField(max_length=50)
+    writer = models.CharField(max_length=10)
     content = models.TextField()
     img = models.ImageField(upload_to='img/')
     created_at = models.DateTimeField(default=timezone.now)
@@ -47,3 +47,13 @@ class Feed(models.Model):
                     writer=myfake.name(),
                     content=myfake.catch_phrase() + ' 속에 ' + myfake.catch_phrase() + ' 제시 ' + myfake.catch_phrase(),
                 )
+
+class FeedComment(models.Model):
+    content = models.TextField()
+    feed = models.ForeignKey(Feed, on_delete=models.CASCADE)
+    reactor = models.CharField(max_length=5)
+    password = models.TextField(default='1234') # have to fix (for privacy and default)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.reactor

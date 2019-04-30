@@ -92,14 +92,15 @@ def show(request, id):
 def manage(request, id):
     feed = Feed.objects.get(id=id)
     if (request.method == 'POST') and (feed.password == request.POST['password']) :
-        # 이렇게 개발하면 안되지!!! 나중에 수정필요
-        return redirect('/article/%d/edit/'%id)
+        #  일단 렌더를 통해 구현했음!
+        # return redirect('/article/%d/edit/'%id)
+        return render(request, 'feeds/edit.html', {'feed': feed})  
     else:
         return render(request, 'feeds/manage.html', {'feed': feed})
 
-def edit(request, id):
-    feed = Feed.objects.get(id=id)
-    return render(request, 'feeds/edit.html', {'feed': feed})    
+# def edit(request, id):
+#     feed = Feed.objects.get(id=id)
+#     return render(request, 'feeds/edit.html', {'feed': feed})    
 
 def delete(request, id):
     feed = Feed.objects.get(id=id)

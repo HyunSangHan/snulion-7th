@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="offset-down">
-    <form action='/article/{{ feed.id }}/manage/' method='POST'>
+    <form action='/article/{{ feed.id }}/edit/' method='POST'>
         {% csrf_token %}
         <p>
             비밀번호<br/>

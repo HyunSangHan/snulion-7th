@@ -105,9 +105,7 @@ def delete(request, id):
         feed = Feed.objects.get(id=id)
         feed.delete()
         return redirect('/')
-        print(request.method)
     else:
-        print(request.method)
         return redirect('/')
 
 def create_comment(request, id):

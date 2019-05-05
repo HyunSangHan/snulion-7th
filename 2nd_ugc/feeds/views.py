@@ -34,8 +34,6 @@ def index(request):
             is_searched = False
         else:
             is_searched = True
-        print(is_searched)
-        print(search_result_num)
         return render(request, 'feeds/index.html', {'feeds' : feeds, 'keyword' : keyword, 'is_searched' : is_searched, 'search_result_num' : search_result_num})
 
 def new(request):
@@ -103,9 +101,14 @@ def manage(request, id):
 #     return render(request, 'feeds/edit.html', {'feed': feed})    
 
 def delete(request, id):
-    feed = Feed.objects.get(id=id)
-    feed.delete()
-    return redirect('/')
+    if request.method == "POST":
+        feed = Feed.objects.get(id=id)
+        feed.delete()
+        return redirect('/')
+        print(request.method)
+    else:
+        print(request.method)
+        return redirect('/')
 
 def create_comment(request, id):
     reactor = request.POST['reactor']
@@ -115,7 +118,7 @@ def create_comment(request, id):
     return redirect(request.META['HTTP_REFERER'])
 
 def delete_comment(request, id, cid):
-    if request.method == 'POST':
+    if request.method == "POST":
         c = FeedComment.objects.get(id=cid)
         if c.password == request.POST['password']:
             c.delete()

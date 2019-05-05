@@ -27,17 +27,19 @@
 {% comment %} 복사하기 url도 넣기 {% endcomment %}
     {% for c in feed.feedcomment_set.all %}
     <p>{{c.reactor}} : {{ c.content }}
-    <a href="/article/{{ feed.id }}/comments/{{ c.id }}/">
-        <button>댓글 삭제</button>
-    </a>
+        <form action="/article/{{ feed.id }}/comments/{{ c.id }}/" method="DELETE">
+            {% csrf_token %}
+            <input type="submit" value="댓글 삭제" />
+        </form>
     </p>
         <!--commentreply는 대댓글을 의미-->
     <div class="commentreply">
         {% for r in c.commentreply_set.all %}
         <p>ㄴ {{r.replyer}} : {{ r.content }}
-        <a href="/article/{{ feed.id }}/comments/{{ c.id }}/reply/{{ r.id}}/">
-            (삭제)
-        </a>
+        <form action="/article/{{ feed.id }}/comments/{{ c.id }}/reply/{{ r.id}}/" method="DELETE">
+            {% csrf_token %}
+            <input type="submit" value="(삭제)" />
+        </form>
         </p>
         {% endfor %}
     </div>

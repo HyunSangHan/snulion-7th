@@ -9,6 +9,7 @@ class Feed(models.Model):
     title = models.CharField(max_length=50)
     category = models.CharField(max_length=10)
     password = models.TextField(default='1234') # have to fix (for privacy and default)
+    view_count = models.IntegerField(default=0)
     writer = models.CharField(max_length=10)
     content = models.TextField()
     img = models.ImageField(upload_to='img/')

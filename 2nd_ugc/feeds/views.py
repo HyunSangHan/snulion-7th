@@ -85,6 +85,8 @@ def show(request, id):
         feed.save()
         return redirect('/article/%d/'%id)
     else:
+        feed.view_count += 1
+        feed.save()
         return render(request, 'feeds/show.html', {'feed': feed})
 
 def manage(request, id):

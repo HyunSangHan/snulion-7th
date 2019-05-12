@@ -33,6 +33,7 @@ urlpatterns = [
     path('article/<int:id>/comments/', feeds.views.create_comment, name='create_comment'),
     path('article/<int:id>/comments/<int:cid>/', feeds.views.delete_comment, name='delete_comment'),
     path('article/<int:id>/comments/<int:cid>/reply/', feeds.views.create_reply, name='create_reply'),
+    path('article/<int:id>/comments/<int:cid>/reply/', feeds.views.create_reply, name='create_reply'),
     path('article/<int:id>/comments/<int:cid>/reply/<int:rid>/', feeds.views.delete_reply, name='delete_reply'),
     path('accounts/', include('accounts.urls')),
 ]

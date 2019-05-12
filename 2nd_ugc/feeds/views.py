@@ -96,7 +96,7 @@ def manage(request, id):
         # return redirect('/article/%d/edit/'%id)
         return render(request, 'feeds/edit.html', {'feed': feed})  
     else:
-        return render(request, 'feeds/manage.html', {'feed': feed})
+        return render(request, 'feeds/manage.html')
 
 # def edit(request, id):
 #     feed = Feed.objects.get(id=id)

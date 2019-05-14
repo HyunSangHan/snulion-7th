@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="offset-down container">
-    <form action='{% url "index" %}' id='article' method='POST' enctype="multipart/form-data">
+    <form action='{% url "new" %}' id='article' method='POST' enctype="multipart/form-data">
         {% csrf_token %}
         <p>
             제목<br/>

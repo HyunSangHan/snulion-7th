@@ -9,6 +9,25 @@ from django.db.models import Q
 # Create your views here.
 def index(request):
     # 로그인 한 경우에만 index를 렌더해주려면 어떻게 하지?
+    keyword = request.GET.get('keyword', '')
+    feeds_all = Feed.objects.all().order_by('-updated_at', '-created_at')
+    if keyword: 
+        feeds_all = feeds_all.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(writer__icontains=keyword))
+    search_result_num = len(feeds_all)
+
+    paginator = Paginator(feeds_all, 10)
+    page_num = request.GET.get('page')
+    feeds = paginator.get_page(page_num)
+
+    if keyword and feeds:
+        is_searched = True
+    elif keyword == '':
+        is_searched = False
+    else:
+        is_searched = True
+    return render(request, 'feeds/index.html', {'feeds' : feeds, 'keyword' : keyword, 'is_searched' : is_searched, 'search_result_num' : search_result_num})
+
+def new(request):
     if request.method == 'POST':
         title = request.POST['title']
         category = request.POST['category']
@@ -19,26 +38,7 @@ def index(request):
         Feed.objects.create(title=title, content=content, category=category, writer=writer, img=img)
         return redirect('/')
     else:
-        keyword = request.GET.get('keyword', '')
-        feeds_all = Feed.objects.all().order_by('-updated_at', '-created_at')
-        if keyword: 
-            feeds_all = feeds_all.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(writer__icontains=keyword))
-        search_result_num = len(feeds_all)
-
-        paginator = Paginator(feeds_all, 10)
-        page_num = request.GET.get('page')
-        feeds = paginator.get_page(page_num)
-
-        if keyword and feeds:
-            is_searched = True
-        elif keyword == '':
-            is_searched = False
-        else:
-            is_searched = True
-        return render(request, 'feeds/index.html', {'feeds' : feeds, 'keyword' : keyword, 'is_searched' : is_searched, 'search_result_num' : search_result_num})
-
-def new(request):
-    return render(request, 'feeds/new.html')
+        return render(request, 'feeds/new.html')
 
 def category(request, id):
     if id == 1:
@@ -81,7 +81,7 @@ def show(request, id):
         feed.category = request.POST['category']
         feed.writer = request.POST['writer']
         feed.content = request.POST['content']
-        feed.img = request.POST['img']
+        img = request.FILES.get('img', False)
         feed.updated_at = timezone.now()
         feed.save()
         return redirect('/article/%d/'%id)
@@ -97,7 +97,7 @@ def manage(request, id):
         # return redirect('/article/%d/edit/'%id)
         return render(request, 'feeds/edit.html', {'feed': feed})  
     else:
-        return render(request, 'feeds/manage.html')
+        return render(request, 'feeds/manage.html', {'feed': feed})
 
 # def edit(request, id):
 #     feed = Feed.objects.get(id=id)

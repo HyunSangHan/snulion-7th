@@ -3,7 +3,7 @@
 {% block content %}
 <div class="offset-down">
 
-    <form action='/article/{{ feed.id }}/' id='article' method='POST'>
+    <form action='/article/{{ feed.id }}/' id='article' method='POST' enctype="multipart/form-data">
         {% csrf_token %}
         <p>
             제목<br/>
@@ -15,7 +15,10 @@
         </p>
         <p>
             이미지<br/>
-            <input type="file" name="img" accept="image/x-png,image/gif,image/jpeg" /> <br/>
+            <input type="file" name="img" /> <br/>
+            {% if feed.img.url != "/media/False" %}
+                <img  src="{{ feed.img.url }}"  alt="thumbnail" height="60" width="80" />
+            {% endif %}
         </p>
         <p>
             내용<br/>

@@ -12,7 +12,7 @@ class Feed(models.Model):
     view_count = models.IntegerField(default=0)
     writer = models.CharField(max_length=10)
     content = models.TextField()
-    img = models.ImageField(null=True, upload_to='feed_photos')
+    img = models.ImageField(null=True, upload_to='feeds')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 

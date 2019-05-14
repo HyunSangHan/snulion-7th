@@ -91,8 +91,8 @@ def show(request, id):
         return render(request, 'feeds/show.html', {'feed': feed})
 
 def manage(request, id):
-        feed = Feed.objects.get(id=id)
-        return render(request, 'feeds/manage.html', {'feed': feed})
+    feed = Feed.objects.get(id=id)
+    return render(request, 'feeds/manage.html', {'feed': feed})
 
 def edit(request, id):
     feed = Feed.objects.get(id=id)

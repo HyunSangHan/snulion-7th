@@ -1,8 +1,10 @@
-header {
+.header {
     position: fixed;
     width: 100%;
     top: 0;
     height: 95px;
+    background-color: yellow;
+    color: white;
 }
 
 body {
@@ -22,6 +24,11 @@ a .deco-none {
     color: black;
     text-decoration: none;
 }
+
+textarea {
+    box-sizing: border-box;
+    resize: none;
+  }
 
 .deco-none a:hover {
     color: black;
@@ -53,6 +60,10 @@ a .deco-none {
 }
 
 .flex {
+    display: flex;
+}
+
+.flex-center {
     display: flex;
     align-items: center;
     justify-content: center;

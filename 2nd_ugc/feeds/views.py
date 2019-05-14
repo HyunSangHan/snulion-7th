@@ -14,7 +14,8 @@ def index(request):
         category = request.POST['category']
         writer = request.POST['writer']
         content = request.POST['content']
-        img = request.POST['img']
+        img = request.FILES.get('img', False)
+
         Feed.objects.create(title=title, content=content, category=category, writer=writer, img=img)
         return redirect('/')
     else:

@@ -9,22 +9,28 @@
     {% endif %}
 
 {% for feed in feeds %}
-<div class = "deco-none listing">
-    <a href = '/article/{{ feed.id }}' >
-        <div class="h-100 hover">
-            <div class="deco-none flex w-100 h-100">
-                <div class = "listing-title">
-                    [{{ feed.category}}] {{ feed.title }}
-                    <!--수정필요: 이미지-->
-                    {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
-                    {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
-                </div>
-                <div>
-                    <img src="http://www.balletnmodel.com/data/editor/1804/ed2e758db4d3f98eb4014ac30012ef0a_1524036326_18.jpg" alt="thumbnail" height="60" width="80" />
+<div class="container">
+    <div class = "deco-none listing">
+        <a href = '/article/{{ feed.id }}' >
+            <div class="h-100 hover">
+                <div class="deco-none flex-center w-100 h-100">
+                    <div class = "listing-title">
+                        [{{ feed.category}}] {{ feed.title }} {{ feed.img.url }}
+                        <!--수정필요: 이미지-->
+                        {% comment %} <p> {{ feed.img }}</p> {% endcomment %}
+                        {% comment %} <p> {{ feed.content }}</p> {% endcomment %}
+                    </div>
+                    <div>
+                        {% if feed.img.url == "/media/False" %}
+                            <img src="/static/feeds/img_ready.png" alt="thumbnail_default" height="60" width="80" />
+                        {% else %}
+                            <img  src="{{ feed.img.url }}"  alt="thumbnail" height="60" width="80" />
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
 </div>
 {% endfor%}
 </div>

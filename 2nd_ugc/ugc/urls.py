@@ -37,4 +37,4 @@ urlpatterns = [
     path('article/<int:id>/comments/<int:cid>/reply/<int:rid>/', feeds.views.delete_reply, name='delete_reply'),
     path('accounts/', include('accounts.urls')),
 ]
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

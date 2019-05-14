@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="offset-down">
-    <form action='{% url "index" %}' id='article' method='POST'>
+<div class="offset-down container">
+    <form action='{% url "index" %}' id='article' method='POST' enctype="multipart/form-data">
         {% csrf_token %}
         <p>
             제목<br/>
@@ -14,7 +14,7 @@
         </p>
         <p>
             이미지<br/>
-            <input type="file" name="img" accept="image/x-png,image/gif,image/jpeg" /> <br/>
+            <input type="file" name="img" /> <br/>
         </p>
         <p>
             내용<br/>

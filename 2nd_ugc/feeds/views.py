@@ -81,7 +81,7 @@ def show(request, id):
         feed.category = request.POST['category']
         feed.writer = request.POST['writer']
         feed.content = request.POST['content']
-        img = request.FILES.get('img', False)
+        feed.img = request.FILES.get('img', False)
         feed.updated_at = timezone.now()
         feed.save()
         return redirect('/article/%d/'%id)

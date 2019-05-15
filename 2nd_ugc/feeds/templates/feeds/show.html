@@ -14,10 +14,12 @@
             <span>조회수: {{ feed.view_count}}</span>
         </div>
     </div>
-    <div>
+    <div class="w-100">
         <!--수정필요: 이미지-->
         {% if feed.img.url != "/media/False" %}
-            <img src="{{ feed.img.url }}" alt="thumbnail" style="width 100%" />
+        <div class="w-100 flex-center">
+            <img src="{{ feed.img.url }}" alt="thumbnail" class="show-img" />
+        </div>
         {% endif %} 
         <p> {{ feed.content }}</p>
         ⓒ 무단전재 및 재배포 적극 권장
@@ -27,6 +29,7 @@
     </p>
 {% comment %} 복사하기 url도 넣기 {% endcomment %}
     {% for c in feed.feedcomment_set.all %}
+    <!--a태그로 댓글삭제를???-->
     <p>{{c.reactor}} : {{ c.content }}
         <a href="/article/{{ feed.id }}/comments/{{ c.id }}/">
             <button>댓글 삭제</button>
@@ -35,7 +38,8 @@
         <!--commentreply는 대댓글을 의미-->
     <div class="commentreply">
         {% for r in c.commentreply_set.all %}
-        <p>ㄴ {{r.replyer}} : {{ r.content }}
+        <p>ㄴ {{ r.replyer }} : {{ r.content }}
+    <!--a태그로 댓글삭제를???-->
         <a href= "/article/{{ feed.id }}/comments/{{ c.id }}/reply/{{ r.id}}/">
             <input type="submit" value="(삭제)" />
         </a>

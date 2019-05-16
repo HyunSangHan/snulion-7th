@@ -1,68 +1,72 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="offset-down container">
-    <div>
+<div class="offset-down">
+    <div class="container main-content">
         <div>
-            <h2>{{ feed.title }}</h2>
+            <div>
+                <h2>{{ feed.title }}</h2>
+            </div>
+            <div>
+                {{feed.category}}
+                <p> {{ feed.writer }} 기자</p>
+                <p> 기사입력: {{ feed.created_at }} </p>
+                <p> 최종편집: {{ feed.updated_at }} </p>
+                <span>조회수: {{ feed.view_count}}</span>
+            </div>
         </div>
-        <div>
-            {{feed.category}}
-            <p> {{ feed.writer }} 기자</p>
-            <p> 기사입력: {{ feed.created_at }} </p>
-            <p> 최종편집: {{ feed.updated_at }} </p>
-            <span>조회수: {{ feed.view_count}}</span>
+        <div class="w-100">
+            <!--수정필요: 이미지-->
+            {% if feed.img.url != "/media/False" %}
+            <div class="w-100 flex-center">
+                <img src="{{ feed.img.url }}" alt="thumbnail" class="show-img" />
+            </div>
+            {% endif %} 
+            <p> {{ feed.content }}</p>
+            ⓒ 무단전재 및 재배포 적극 권장
         </div>
-    </div>
-    <div class="w-100">
-        <!--수정필요: 이미지-->
-        {% if feed.img.url != "/media/False" %}
-        <div class="w-100 flex-center">
-            <img src="{{ feed.img.url }}" alt="thumbnail" class="show-img" />
-        </div>
-        {% endif %} 
-        <p> {{ feed.content }}</p>
-        ⓒ 무단전재 및 재배포 적극 권장
-    </div>
-    <p>
-        <a href = '/article/{{ feed.id }}/manage' >글수정</a>
-    </p>
-{% comment %} 복사하기 url도 넣기 {% endcomment %}
-    {% for c in feed.feedcomment_set.all %}
-    <!--a태그로 댓글삭제를???-->
-    <p>{{c.reactor}} : {{ c.content }}
-        <a href="/article/{{ feed.id }}/comments/{{ c.id }}/">
-            <button>댓글 삭제</button>
-        </a>
-    </p>
-        <!--commentreply는 대댓글을 의미-->
-    <div class="commentreply">
-        {% for r in c.commentreply_set.all %}
-        <p>ㄴ {{ r.replyer }} : {{ r.content }}
-    <!--a태그로 댓글삭제를???-->
-        <a href= "/article/{{ feed.id }}/comments/{{ c.id }}/reply/{{ r.id}}/">
-            <input type="submit" value="(삭제)" />
-        </a>
+        <p>
+            <a href = '/article/{{ feed.id }}/manage' >글수정</a>
         </p>
-        {% endfor %}
-    </div>
-        <form action="/article/{{ feed.id }}/comments/{{ c.id }}/reply/" method="POST">
+    {% comment %} 복사하기 url도 넣기 {% endcomment %}
+        {% for c in feed.feedcomment_set.all %}
+        <!--a태그로 댓글삭제를???-->
+        <p>{{c.reactor}} : {{ c.content }}
+            <a href="/article/{{ feed.id }}/comments/{{ c.id }}/">
+                <button>댓글 삭제</button>
+            </a>
+        </p>
+            <!--commentreply는 대댓글을 의미-->
+        <div class="commentreply">
+            {% for r in c.commentreply_set.all %}
+            <p>ㄴ {{ r.replyer }} : {{ r.content }}
+        <!--a태그로 댓글삭제를???-->
+            <a href= "/article/{{ feed.id }}/comments/{{ c.id }}/reply/{{ r.id}}/">
+                <input type="submit" value="(삭제)" />
+            </a>
+            </p>
+            {% endfor %}
+        </div>
+            <form action="/article/{{ feed.id }}/comments/{{ c.id }}/reply/" method="POST">
+            {% csrf_token %}
+                <input type="text" name="replyer" placeholder="작성자 이름" required />
+                <input type="password" name="password" placeholder="비밀번호" required />
+                <input type="text" name="content" placeholder="대댓글 입력" required />
+                <button type="submit">대댓글 달기</button>
+            </form>
+            <br/>
+            {% endfor %}
+        <hr>
+        <form action="/article/{{ feed.id }}/comments/" id="comment" method="POST">
         {% csrf_token %}
-            <input type="text" name="replyer" placeholder="작성자 이름" required />
-            <input type="password" name="password" placeholder="비밀번호" required />
-            <input type="text" name="content" placeholder="대댓글 입력" required />
-            <button type="submit">대댓글 달기</button>
+            <input type="text" name="reactor" placeholder="작성자 이름" required />
+            <input type="password" name="password"  placeholder="비밀번호" required />
+            <br/>
+            <textarea name="content" form="comment" cols="41" rows="3" placeholder="댓글 입력" required ></textarea> <br/>
+            <button type="submit">댓글 달기</button>
         </form>
-        <br/>
-        {% endfor %}
-    <hr>
-    <form action="/article/{{ feed.id }}/comments/" id="comment" method="POST">
-    {% csrf_token %}
-        <input type="text" name="reactor" placeholder="작성자 이름" required />
-        <input type="password" name="password"  placeholder="비밀번호" required />
-        <br/>
-        <textarea name="content" form="comment" cols="41" rows="3" placeholder="댓글 입력" required ></textarea> <br/>
-        <button type="submit">댓글 달기</button>
-    </form>
+    </div>
+    <div class="ad-left" style="background: url('/static/feeds/test-ad-img-left.png') center / cover;" ></div>
+    <div class="ad-right" style="background: url('/static/feeds/test-ad-img-right.png') center / cover;" ></div>
 </div>
 {% endblock content %}

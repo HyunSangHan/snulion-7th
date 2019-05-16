@@ -79,7 +79,7 @@ textarea {
     width: 95%;
 }
 
-@media screen and (max-width: 767px){ /*Mobile*/
+@media screen and (max-width: 767.98px){ /*Mobile*/
     .pc-only {
         display: none;
     }
@@ -92,7 +92,7 @@ textarea {
 
 }
 
-@media screen and (min-width: 768px){ /*PC*/
+@media screen and (min-width: 768px) and (max-width: 991.98px){ /*tablet*/
     .mobile-only {
         display: none;
     }
@@ -103,4 +103,56 @@ textarea {
         margin-right: auto;
     }
 
+    .ad-left {
+        display: none;
+    }
+
+    .ad-right {
+        position: fixed;
+        float: right;
+        width: 300px;
+        height: 600px;
+        top: 100px;
+        right: 10px;
+    }
+
+    .main-content {
+        width: calc(100% - 310px) !important;
+        margin-left: 10px !important;
+    }
+}
+
+@media screen and (min-width: 992px){ /*PC*/
+    .mobile-only {
+        display: none;
+    }
+
+    .show-img {
+        width: 80%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .ad-left {
+        position: fixed;
+        float: left;
+        width: 300px;
+        height: 600px;
+        top: 100px;
+        left: 10px;
+    }
+
+    .ad-right {
+        position: fixed;
+        float: right;
+        width: 300px;
+        height: 600px;
+        top: 100px;
+        right: 10px;
+    }
+        .main-content {
+        width: 100% !important;
+        max-width: calc(100% - 620px) !important;
+    }
 }

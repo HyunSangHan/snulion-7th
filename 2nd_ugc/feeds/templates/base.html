@@ -8,19 +8,47 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title>Article</title>
     </head>
     <body>
     <header class="header">
         <div class="flex">
-            <div id="hamburger">
+            <div class="mobile-only hover">
+                <i id="hamburger" class="material-icons deco-none close-btn hover">menu</i>
             </div>
-            <div id="sidebar" class="none">
-                test
+            <div id="sidebar" class="fix hover none">
+                <i class="material-icons deco-none close-btn">close</i>
+                <div class="mobile-cat-wrap">
+                    <div class="mobile-cat deco-none">
+                        <a href="{% url 'index' %}" class="deco-none">전체 카테고리</a>
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/1' class="deco-none">연예</a> 
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/2' class="deco-none">스포츠</a>
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/3' class="deco-none">정치</a>
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/4' class="deco-none">경제</a>
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/5' class="deco-none">사회</a>
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/6' class="deco-none">생활/문화</a>
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/7' class="deco-none">세계</a>
+                    </div>
+                    <div class="mobile-cat deco-none">
+                        <a href='/8' class="deco-none">IT/과학</a>
+                    </div>
+                </div>
             </div>
             <div>
                 <a href='{% url "new" %}'>기사작성하기 </a>
@@ -33,7 +61,7 @@
                 </form>
             </div>
         </div>
-        <div> <!-- class="pc-only"-->
+        <div class="pc-only"> <!-- class="pc-only"-->
             <a href='{% url "index" %}'>전체</a> &nbsp
             <a href='/1'>연예</a> &nbsp
             <a href='/2'>스포츠</a> &nbsp

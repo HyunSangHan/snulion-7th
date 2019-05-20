@@ -1,8 +1,8 @@
 $(document).ready(() => {
     $('#hamburger').on('click', () => {
-        $('#sidebar').show();
+        $('#sidebar').fadeIn();
     })
     $('#sidebar').on('click', () => {
-        $('#sidebar').hide();
+        $('#sidebar').fadeOut();
     })
 })

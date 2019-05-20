@@ -13,7 +13,7 @@
         <title>Article</title>
     </head>
     <body>
-    <header class="header">
+    <header class="header shadow">
         <div class="flex">
             <div class="mobile-only hover">
                 <i id="hamburger" class="material-icons deco-none close-btn hover">menu</i>
@@ -22,7 +22,7 @@
                 <i class="material-icons deco-none close-btn">close</i>
                 <div class="mobile-cat-wrap">
                     <div class="mobile-cat deco-none">
-                        <a href="{% url 'index' %}" class="deco-none">전체 카테고리</a>
+                        <a href="{% url 'index' %}" class="deco-none">전체 기사</a>
                     </div>
                     <div class="mobile-cat deco-none">
                         <a href='/1' class="deco-none">연예</a> 
@@ -61,7 +61,7 @@
                 </form>
             </div>
         </div>
-        <div class="pc-only"> <!-- class="pc-only"-->
+        <div class="pc-only pc-cat-wrap deco-none"> <!-- class="pc-only"-->
             <a href='{% url "index" %}'>전체</a> &nbsp
             <a href='/1'>연예</a> &nbsp
             <a href='/2'>스포츠</a> &nbsp

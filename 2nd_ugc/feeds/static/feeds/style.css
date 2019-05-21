@@ -55,6 +55,23 @@ a .deco-none {
     position: fixed;
 }
 
+.w-100 {
+    width: 100%;
+}
+
+.w-90 {
+    width: 90%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.m-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 textarea {
     box-sizing: border-box;
     resize: none;
@@ -83,8 +100,9 @@ textarea {
 }
 
 .pc-cat-wrap {
+    position: absolute;
     font-size: 20px;
-    bottom: 20px;
+    bottom: 10px;
     width: 80vw;
     margin: 0 auto;
     display: flex;
@@ -135,6 +153,16 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.abs-left {
+    position: absolute;
+    left: 0;
+}
+
+.abs-right {
+    position: absolute;
+    right: 0;
 }
 
 .offset-down {

@@ -17,13 +17,13 @@
                         <div class = "listing-title">
                             [{{ feed.category}}] {{ feed.title }}
                         </div>
-                        <div>
                             {% if feed.img.url == "/media/False" %}
-                                <img src="/static/feeds/img_ready.png" alt="thumbnail_default" height="60" width="80" />
+                                <div class="listing-thumb" style="background: url('/static/feeds/img_ready.png') center / cover;" >
+                                </div>
                             {% else %}
-                                <img  src="{{ feed.img.url }}"  alt="thumbnail" height="60" width="80" />
+                                <div class="listing-thumb" style="background: url('{{ feed.img.url }}') center / cover;" >
+                                </div>
                             {% endif %}
-                        </div>
                     </div>
                 </div>
             </a>
@@ -46,6 +46,5 @@
 </div>
 <div class="ad-left" style="background: url('/static/feeds/test-ad-img-left.png') center / cover;" ></div>
 <div class="ad-right" style="background: url('/static/feeds/test-ad-img-right.png') center / cover;" ></div>
-
 {% endblock content %}
 

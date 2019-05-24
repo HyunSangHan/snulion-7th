@@ -109,8 +109,10 @@ textarea {
     justify-content: space-around;
 }
 
-.pc-cat-wrap > a {
-    color: black;
+.pc-cat {
+    color: black !important;
+    font-size: 1.0rem;
+    font-weight: 500;
 }
 
 .none {
